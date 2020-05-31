@@ -1,0 +1,38 @@
+* {
+    margin:0;
+    padding:0;
+
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr;
+
+    grid-template-areas:
+    "header header"
+
+    "sidenav mainbody"
+    "rightbar rightbar"
+    "footer footer"
+
+}
+
+.header{
+    grid-area:header
+    background-color:purple;
+
+    }
+
+.sidenav{
+    grid-area:sidenav}
+
+.mainbody{
+    grid-area:mainbody}
+
+.rightbar{
+    grid-area:rightbar}
+
+.footer{
+    grid-area:footer}
+
