@@ -7,12 +7,23 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Datacat</title>
+
+	<script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'landing/base.css' %}">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'landing/index.css' %}">
     <!--<style>-->
       <!--/* Always set the map height explicitly to define the size of the div-->
        <!--* element that contains the map. */-->
@@ -40,12 +51,343 @@
   <!--</form>-->
 <!--</nav>-->
 
-<div class="grid">
-	<div class="header">This is freaking header</div>
-	<div class="sidenav">This is freaking Sidenav</div>
-	<div class="mainbody">This is freaking main Body</div>
-	<div class="rightbar">This is freaking right bar</div>
-	<div class="footer">This is freaking footer</div>
+
+<div class="wrapper">
+
+	<div class="main-nav">
+		<ul>
+			<li><a href="#">Datacat</a> </li>
+		</ul>
+	</div>
+	<section class="top-container">
+
+
+		<div class="leftnav">
+			<div class="header1">
+				<span>
+					<h2>Total Infected: {{overallCount}}</h2></span>
+			</div>
+
+			<div class="names">
+				<form method="post" enctype="multipart/form-data" action="selectCountry">
+                    {% csrf_token %}
+
+				{% for con in contryNames %}
+				<table>
+					<tr>
+						<input type="submit" value={{con}} name="countryName" style="width:100px; border:none; border-bottom:1px solid white; background:#58ACA3; color:white; ">
+					</tr>
+				</table>
+				</form>
+                        {% endfor %}
+			</div>
+				<div class="data">
+					<canvas id="myChart" style="height: 6650px; width: 275px;"></canvas>
+				</div>
+
+
+
+
+
+		</div>
+
+			<!--<div class="leftnav">-->
+				<!---->
+					<!--<span style="color: rgb(255, 255, 255); text-align: center;"><h2>Total Infected: {{overallCount}}</h2></span>-->
+
+                    <!--<form method="post" enctype="multipart/form-data" action="selectCountry">-->
+                    <!--{% csrf_token %}-->
+                    <!--<div class="col-lg-4" style="float: left;">-->
+                        <!--{% for con in contryNames %}-->
+                        <!--<table style="border-width: 2px; border: #333;">-->
+                        <!--<tr>-->
+                            <!--<input type="submit" value={{con}} name="countryName" style="width:100px;">-->
+                        <!--</tr>-->
+                    <!--</table>-->
+                        <!--{% endfor %}-->
+                    <!--</div>-->
+                    <!--<div style="float: right;">-->
+                        <!--<canvas id="myChart" style="height: 6650px; width: 280px;"></canvas>-->
+                    <!--</div>-->
+                    <!--</form>-->
+
+
+                <!--</div>-->
+            <!--</div>-->
+
+
+			<div id="mapChart"></div>
+
+		<div class="top-box top-box-a">
+		<h4>Membership</h4>
+		<p class="price">199/month</p>
+		<a href="#" class="btn">buy now</a>
+		</div>
+
+		<div class="top-box top-box-b">
+		<h4> Pro Membership</h4>
+		<p class="price">299/month</p>
+		<a href="#" class="btn">buy now</a>
+		</div>
+
+	</section>
+
+
+	<!--Boxes section -->
+
+	<section class="boxes">
+
+		<div class="box">
+			<i class="fas fa-chart-pie fa-4x"></i>
+			<h3>Analytics</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur
+			adipisicing elit. Beatae, eaque!</p>
+		</div>
+
+		<div class="box">
+			<i class="fas fa-globe fa-4x"></i>
+			<h3>Marketing</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur
+			adipisicing elit. Beatae, eaque!</p>
+		</div>
+
+		<div class="box">
+			<i class="fas fa-cog fa-4x"></i>
+			<h3>Development</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur
+			adipisicing elit. Beatae, eaque!</p>
+		</div>
+
+		<div class="box">
+			<i class="fas fa-users fa-4x"></i>
+			<h3>Users</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur
+			adipisicing elit. Beatae, eaque!</p>
+		</div>
+
+	</section>
+
+	<!-- Info Section -->
+
+	<section class="info">
+		<img src="{% static 'images/destination_3.jpg' %}">
+        </a>
+		<div class="para">
+			<h2>Your business on the web</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+			Adipisci amet cumque laborum repellat repellendus veniam. </p>
+		</div>
+	</section>
+	
+	<section class="portfolio">
+		<img src="https://source.unsplash.com/random/200x200" alt="">
+		<img src="https://source.unsplash.com/random/201x200" alt="">
+		<img src="https://source.unsplash.com/random/202x200" alt="">
+		<img src="https://source.unsplash.com/random/203x200" alt="">
+		<img src="https://source.unsplash.com/random/204x200" alt="">
+		<img src="https://source.unsplash.com/random/205x200" alt="">
+		<img src="https://source.unsplash.com/random/206x200" alt="">
+		<img src="https://source.unsplash.com/random/207x200" alt="">
+	</section>
+
+<!-- Footer -->
+
+	<footer>
+		<p>United coyright &copy; 2020</p>
+	</footer>
 
 </div>
 </body>
+
+<script>
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chartOptions = {
+                            legend: {
+                                display: false
+                                    },
+                            scales: {
+                                xAxes: [{
+                                    barPercentage:1
+                                    }],
+                                yAxes: [
+                                        // {barPercentage: 1},
+                                        // {gridLines:{drawBorder: false}},
+                                        {ticks: {display:false}},
+                                        // {ticks: {mirror: true}},
+                                        {display: false},
+
+                                        ],
+                            elements: {
+                                rectangle: {
+                                borderSkipped: 'left',
+                                }
+                            }
+                            }
+                        };
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'horizontalBar',
+
+        // The data for our dataset
+        data: {
+            labels: {{ contryNames|safe }},
+            datasets: [{
+                data: {{ countsVal|safe }},
+                label: 'Infected Counts',
+                barThickness:'flex',
+                backgroundColor:'#58ACA3',
+
+            }]
+        },
+
+
+
+        // Configuration options go here
+        options: chartOptions
+});
+</script>
+
+<script>
+    var data2={{datasetForLine|safe}};
+    var chartOptions2 = {
+            legend: {
+                display: false
+                    }
+        };
+    var ctx2 = document.getElementById('lineChart').getContext('2d');
+	var myLineChart = new Chart(ctx2, {
+    type: 'line',
+    data: {labels:{{axisvalues|safe}},
+            datasets:data2,},
+    options: chartOptions2
+});
+</script>
+<script>
+
+var someDataMap=[{'code3': 'AFG', 'name': 'Afghanistan', 'value': 484, 'code': 'AF'},
+ {'code3': 'ALB', 'name': 'Albania', 'value': 409, 'code': 'AL'},
+ {'code3': 'DZA', 'name': 'Algeria', 'value': 1666, 'code': 'DZ'},
+ {'code3': 'AND', 'name': 'Andorra', 'value': 583, 'code': 'AD'},
+ {'code3': 'AGO', 'name': 'Angola', 'value': 19, 'code': 'AO'}];
+
+ var someData2=[{
+		"code3": "ABW",
+		"name": "Aruba",
+		"value": 582.34,
+		"code": "AW"
+	},
+	{
+		"code3": "AFG",
+		"name": "Afghanistan",
+		"value": 53.08,
+		"code": "AF"
+	},
+	{
+		"code3": "AGO",
+		"name": "Angola",
+		"value": 23.11,
+		"code": "AO"
+    }];
+ var someData3={{dataForMapGraph|safe}};
+    Highcharts.getJSON('https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/world-population-density.json', function (data) {
+
+// Prevent logarithmic errors in color calulcation
+data.forEach(function (p) {
+    p.value = (p.value < 1 ? 1 : p.value);
+});
+
+// Initiate the chart
+Highcharts.mapChart('mapChart', {
+
+    chart: {
+        map: 'custom/world'
+    },
+
+    title: {
+        text: 'World Map COVID-19 Infection '
+    },
+
+    legend: {
+        title: {
+            text: 'Infected Population',
+            style: {
+                color: ( // theme
+                    Highcharts.defaultOptions &&
+                    Highcharts.defaultOptions.legend &&
+                    Highcharts.defaultOptions.legend.title &&
+                    Highcharts.defaultOptions.legend.title.style &&
+                    Highcharts.defaultOptions.legend.title.style.color
+                ) || 'black'
+            }
+        }
+    },
+
+    mapNavigation: {
+        enabled: true,
+        buttonOptions: {
+            verticalAlign: 'bottom'
+        }
+    },
+
+    tooltip: {
+        backgroundColor: 'none',
+        borderWidth: 0,
+        shadow: false,
+        useHTML: true,
+        padding: 0,
+        pointFormat: '<span class="f32"><span class="flag {point.properties.hc-key}">' +
+            '</span></span> {point.name}<br>' +'<span><h4>{point.value}</h4></span>',
+        positioner: function () {
+            return { x: 0, y: 250 };
+        }
+    },
+
+    colorAxis: {
+        min: 1,
+        max: {{maxVal|safe}},
+        type: 'logarithmic'
+    },
+
+    series: [{
+        data: someData3,
+        joinBy: ['iso-a3', 'code3'],
+        name: 'Infected Counts',
+        states: {
+            hover: {
+                color: '#a4edba'
+            }
+        }
+    }]
+});
+});
+
+</script>
+
+<script>
+var options = {
+          series: {{dataForheatMap|safe}},
+          chart: {
+          height: 6500,
+          type: 'heatmap',
+        },
+        dataLabels: {
+          enabled: true
+        },
+        dataLabels: {
+            position: 'top'
+            },
+        colors: ["#d44942"],
+        yaxis: {
+      show: false},
+      xaxis: {
+          type: 'category',
+          categories: {{dateCat|safe}}
+        },
+
+        };
+var chart4 = new ApexCharts(document.querySelector("#heatchart"), options);
+
+chart4.render();
+</script>
+</html>

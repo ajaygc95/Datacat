@@ -1,11 +1,13 @@
 from django.contrib import admin
-from .views import home
+
 from django.urls import path,include
+from . import views
 
 
 urlpatterns = [
 
 
-    path("",home, name='add-to-cart'),
+    path("",views.index, name='views'),
+
 
 ]
