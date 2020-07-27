@@ -4,14 +4,39 @@
     --dark : #333;
     --light: #fff;
     --shadow:0 1px 5px rgba(104, 104,104, 0.8)
-}
 
+}
 
 html {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--dark);
 }
+
+
+.navbar{
+    font-size:1.2rem;
+    background-color: rgba(255, 255, 255, 1)!important;
+    height:80px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.33);
+
+}
+
+
+.navbar-brand{
+    color:purple;
+    margin-left: 100px;
+    font-size:1.5rem;
+    margin-right:700px;
+}
+
+.nav-link{
+    font-weight:bold;
+    color:purple;
+}
+
+
+
 
 
 body{
@@ -29,7 +54,7 @@ body{
 }
 
 img {
-    max-width: 100%;
+    max-width: 80%;
 }
 
 .wrapper{
@@ -38,7 +63,7 @@ img {
 }
 
 .main-nav ul{
-    background: white;
+    background: #58ACA3;
     display: grid;
     grid-gap:20px;
     height: 50px;
@@ -48,7 +73,8 @@ img {
 
 }
 .main-nav a {
-    color: black;
+
+    color: white;
     text-decoration:none;
     text-transform: uppercase;
     font-size: 1.3rem;
@@ -59,6 +85,8 @@ img {
 .main-nav a:hover{
     text-decoration: underline;
     box-shadow:none;
+    color: purple;
+    font-weight: bold;
 }
 
 .btn:hover{
